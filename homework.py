@@ -37,9 +37,9 @@ def get_email():
     if request.method == 'POST':
         username = request.form.get('username')
         user_email = request.form.get('email')
-        response = make_response("Cookie")
-        response.set_cookie(username, user_email)
-        return redirect(url_for('greetings', name=username))
+        response = make_response(redirect(url_for('greetings', name=username)))
+        response.set_cookie('name', username)
+        return response
     return render_template('email_form.html')
 
 
@@ -50,8 +50,9 @@ def greetings(name):
 
 @app.route('/greetings')
 def user_quit():
-    # request.cookies.clear()
-    return render_template('email_form.html')
+    response = make_response(redirect('/email/'))
+    response.delete_cookie('name')
+    return response
 
 
 if __name__ == '__main__':
