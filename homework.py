@@ -24,14 +24,6 @@ def main():
     return render_template('main_page.html')
 
 
-@app.route('/pow/', methods=['GET', 'POST'])
-def square():
-    if request.method == 'POST':
-        number = int(request.form.get('number'))
-        return f"Число {number} в квадрате: {number * number}"
-    return render_template('number_pow.html')
-
-
 @app.route('/email/', methods=['GET', 'POST'])
 def get_email():
     if request.method == 'POST':
